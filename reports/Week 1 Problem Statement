@@ -1,0 +1,42 @@
+WEEK 1: PROBLEM STATEMENT DRAFT
+
+Problem Context:
+Modern cloud computing systems are continuously adjusting the amount of computing resources they allocate in order to handle changing workloads. If too few resources are allocated, system performance may degrade and service-level objectives (SLAs) may be violated. If too many resources are allocated, costs increase due to wasted capacity. Real-world cloud systems rely on autoscaling approaches, such as scaling resources based on simple CPU utilization thresholds. While these methods are easy to implement, they can struggle when workloads are bursty or change rapidly. This motivates my problem in this directed research course - exploring whether predictive, workload-aware autoscaling approaches can better balance performance and efficiency under realistic conditions.
+
+Research Question:
+How can workload-aware predictive autoscaling improve SLA compliance and resource utilization compared to reactive threshold-based scaling when evaluated on realistic cluster workload traces?
+
+System Assumptions: 
+Since this project is exploratory and more focused on understanding autoscaling behavior rather than deploying a real system, the following are assumptions made to keep the problem manageable while still allowing the autoscaling strategies to be tested in a realistic setting:
+-Workloads are replayed using publicly available cluster workload trace datasets
+-Autoscaling decisions are made at fixed time intervals
+-Resource provisioning, scaling actions, and system behavior are simulated rather than in a real cloud environment
+-The autoscaler has access only to historical workload information and is limited in short-term predictions
+
+Metrics: 
+The metrics chosen for this project are intended to capture two main things: 1) how well the system meets performance goals and 2) how efficiently it uses resources. These metrics were selected based on common evaluation practices in cloud systems and autoscaling research:
+  -SLA violation rate (measuring how often performance targets are not met)
+  -Average resource utilization (indicating how efficiently resources are used)
+  -Over-provisioned capacity to use as a proxy for cost
+  -Scaling action frequency (reflecting system stability and responsiveness)
+
+Constraints:
+To better reflect how autoscaling works in real cloud environments, the project includes several practical constraints. These constraints help prevent unrealistic behavior, such as scaling too frequently or assuming instant resource availability:
+  -Scaling cooldown periods are enforced to prevent excessive scaling actions
+  -Provisioning delays are modeled to reflect real-world resource startup times
+  -No perfect future workload knowledge is assumed beyond a limited prediction horizon
+
+Anticipated Challenges:
+Based on initial reading of the problem/study scope and an early understanding of cluster workloads, several challenges are expected in areas where results may be difficult to interpret or where additional care will be needed during evaluation:
+  -Cluster workloads are noisy and highly variable, so prediction can be difficult
+  -Results may be biased if conclusions are drawn from a single or few datasets
+  -Ensuring a fair and consistent comparison between predictive and reactive autoscaling approaches
+
+Non-Goals:
+These are advanced goals are intentionally excluded, that are beyond the scope of this project:
+  -Deploy or test autoscaling policies in a real production cloud
+  -Guarantee production-level SLA compliance
+  -Address multi-cluster or geo-distributed cloud environments
+  -Optimize hardware-level performance or energy efficiency
+
+
