@@ -1,0 +1,82 @@
+[
+  {
+    "scenario_id": 1,
+    "event": "SLA_VIOLATION_SPIKE",
+    "workload_type": "Sudden Burst",
+    "predictive_model_forecast": "45% CPU",
+    "actual_observed_usage": "95% CPU",
+    "current_config": {"reactive_fallback_threshold": 85, "scale_down_cooldown": 300}
+  },
+  {
+    "scenario_id": 2,
+    "event": "WASTED_RESOURCES",
+    "workload_type": "Sudden Drop",
+    "predictive_model_forecast": "80% CPU",
+    "actual_observed_usage": "20% CPU",
+    "current_config": {"reactive_fallback_threshold": 80, "scale_down_cooldown": 600}
+  },
+  {
+    "scenario_id": 3,
+    "event": "SLA_VIOLATION_SPIKE",
+    "workload_type": "Sustained High Load",
+    "predictive_model_forecast": "60% CPU",
+    "actual_observed_usage": "99% CPU",
+    "current_config": {"reactive_fallback_threshold": 90, "scale_down_cooldown": 300}
+  },
+  {
+    "scenario_id": 4,
+    "event": "WASTED_RESOURCES",
+    "workload_type": "Gradual Decline",
+    "predictive_model_forecast": "70% CPU",
+    "actual_observed_usage": "15% CPU",
+    "current_config": {"reactive_fallback_threshold": 75, "scale_down_cooldown": 900}
+  },
+  {
+    "scenario_id": 5,
+    "event": "SLA_VIOLATION_SPIKE",
+    "workload_type": "Micro-Burst",
+    "predictive_model_forecast": "30% CPU",
+    "actual_observed_usage": "88% CPU",
+    "current_config": {"reactive_fallback_threshold": 80, "scale_down_cooldown": 120}
+  },
+  {
+    "scenario_id": 6,
+    "event": "NORMAL_OPERATION",
+    "workload_type": "Stable",
+    "predictive_model_forecast": "65% CPU",
+    "actual_observed_usage": "68% CPU",
+    "current_config": {"reactive_fallback_threshold": 80, "scale_down_cooldown": 300}
+  },
+  {
+    "scenario_id": 7,
+    "event": "WASTED_RESOURCES",
+    "workload_type": "Over-prediction Error",
+    "predictive_model_forecast": "95% CPU",
+    "actual_observed_usage": "10% CPU",
+    "current_config": {"reactive_fallback_threshold": 85, "scale_down_cooldown": 1200}
+  },
+  {
+    "scenario_id": 8,
+    "event": "SLA_VIOLATION_SPIKE",
+    "workload_type": "Extreme Burst",
+    "predictive_model_forecast": "20% CPU",
+    "actual_observed_usage": "100% CPU",
+    "current_config": {"reactive_fallback_threshold": 55, "scale_down_cooldown": 300}
+  },
+  {
+    "scenario_id": 9,
+    "event": "NORMAL_OPERATION",
+    "workload_type": "Slight Fluctuation",
+    "predictive_model_forecast": "50% CPU",
+    "actual_observed_usage": "45% CPU",
+    "current_config": {"reactive_fallback_threshold": 80, "scale_down_cooldown": 300}
+  },
+  {
+    "scenario_id": 10,
+    "event": "SLA_VIOLATION_SPIKE",
+    "workload_type": "Model Failure",
+    "predictive_model_forecast": "10% CPU",
+    "actual_observed_usage": "90% CPU",
+    "current_config": {"reactive_fallback_threshold": 95, "scale_down_cooldown": 600}
+  }
+]
