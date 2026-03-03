@@ -1,0 +1,187 @@
+--- Processing Scenario 1 ---
+LLM Output: {
+  "root_cause": "The predictive model drastically underestimated a sudden workload burst, and the reactive fallback threshold was too high to provision resources proactively, leading to an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 70,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 70, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 2 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly overestimated demand during a sudden workload drop. The long scale-down cooldown prevented the autoscaler from rapidly de-provisioning resources, leading to prolonged over-provisioning and wasted resources.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 600}
+
+--- Processing Scenario 3 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly underestimated the actual sustained high load, leading to severe under-provisioning and an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 4 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly over-forecasted CPU usage for a declining workload, leading to over-provisioning and wasted resources.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 75,
+  "new_cooldown": 450
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 75, 'scale_down_cooldown': 900}
+
+--- Processing Scenario 5 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly under-forecasted the load for a micro-burst, and the current reactive fallback threshold was too high to provision capacity quickly enough, leading to an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 60,
+  "new_cooldown": 120
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 60, 'scale_down_cooldown': 120}
+
+--- Processing Scenario 6 ---
+LLM Output: {
+  "root_cause": "No anomaly detected; system operating within normal parameters. Actual usage is close to forecast and well below the reactive fallback threshold.",
+  "recommended_action": "NO_ACTION",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 7 ---
+LLM Output: {
+  "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 27.663351752s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '27s'}]}}"
+}
+Guardrail Triggered: Invalid LLM Output. Discarding.
+Final Safe Configuration: {'reactive_fallback_threshold': 85, 'scale_down_cooldown': 1200}
+
+--- Processing Scenario 8 ---
+LLM Output: {
+  "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 27.536221462s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '27s'}]}}"
+}
+Guardrail Triggered: Invalid LLM Output. Discarding.
+Final Safe Configuration: {'reactive_fallback_threshold': 55, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 9 ---
+LLM Output: {
+  "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 27.412754631s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '27s'}]}}"
+}
+Guardrail Triggered: Invalid LLM Output. Discarding.
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 10 ---
+LLM Output: {
+  "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 27.293756623s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '27s'}]}}"
+}
+Guardrail Triggered: Invalid LLM Output. Discarding.
+Final Safe Configuration: {'reactive_fallback_threshold': 95, 'scale_down_cooldown': 600}
+
+[Done] exited with code=0 in 54.745 seconds
+
+[Running] python3 "/Users/sufiya/my_data_folder/classes/CP395/aiops_agent.py"
+
+--- Processing Scenario 1 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly underestimated the sudden burst workload, and the high reactive fallback threshold (85%) delayed the autoscaler's response, leading to an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 70,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 70, 'scale_down_cooldown': 300}
+Final Safe Configuration: {'reactive_fallback_threshold': 70, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 2 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly over-forecasted demand (80% vs. 20% actual), leading to over-provisioning. The long scale-down cooldown prevented the autoscaler from quickly de-provisioning resources after a sudden workload drop, resulting in wasted resources.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 600}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 600}
+
+--- Processing Scenario 3 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly underestimated the actual sustained high load, and the reactive autoscaling threshold was too high, leading to delayed capacity addition and an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 75,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 75, 'scale_down_cooldown': 300}
+Final Safe Configuration: {'reactive_fallback_threshold': 75, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 4 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly overestimated CPU usage for a gradual decline workload (70% forecast vs 15% actual), leading to over-provisioning and wasted resources. The current scale-down cooldown of 900 seconds is likely too long, delaying the reclamation of excess capacity.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 75,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 75, 'scale_down_cooldown': 900}
+Final Safe Configuration: {'reactive_fallback_threshold': 75, 'scale_down_cooldown': 900}
+
+--- Processing Scenario 5 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly underestimated 'Micro-Burst' workload, leading to an SLA violation due to insufficient capacity. The reactive threshold was not low enough to compensate for the forecast error quickly.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 70,
+  "new_cooldown": 120
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 70, 'scale_down_cooldown': 120}
+Final Safe Configuration: {'reactive_fallback_threshold': 70, 'scale_down_cooldown': 120}
+
+--- Processing Scenario 6 ---
+LLM Output: {
+  "root_cause": "Normal operation, observed usage is in line with forecast and well within the reactive threshold.",
+  "recommended_action": "NO_ACTION",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 7 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly over-predicted CPU usage, leading to resource over-provisioning. The extended scale-down cooldown period exacerbated the duration of wasted resources.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 85,
+  "new_cooldown": 600
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 85, 'scale_down_cooldown': 1200}
+Final Safe Configuration: {'reactive_fallback_threshold': 85, 'scale_down_cooldown': 1200}
+
+--- Processing Scenario 8 ---
+LLM Output: {
+  "root_cause": "Predictive model failed to forecast extreme burst workload, leading to 100% CPU utilization and SLA violation, indicating the reactive autoscaler threshold was not aggressive enough.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 40,
+  "new_cooldown": 300
+}
+Guardrail Triggered: Threshold 40 is unsafe. Ignoring.
+Final Safe Configuration: {'reactive_fallback_threshold': 55, 'scale_down_cooldown': 300}
+Guardrail Triggered: Threshold 40 is unsafe. Ignoring.
+Final Safe Configuration: {'reactive_fallback_threshold': 55, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 9 ---
+LLM Output: {
+  "root_cause": "No anomaly detected. System operating within normal parameters with accurate predictive forecasting.",
+  "recommended_action": "NO_ACTION",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 10 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly underestimated workload, leading to under-provisioning. The reactive fallback threshold was too high to scale up in time, resulting in an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 600
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 600}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 600}
