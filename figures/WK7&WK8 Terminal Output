@@ -1,0 +1,113 @@
+WEEK 7 TERMINAL OUTPUT (aiops_agent.py):
+
+--- Processing Scenario 1 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly underestimated the sudden burst workload, and the high reactive fallback threshold (85%) delayed the autoscaler's response, leading to an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 70,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 70, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 2 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly over-forecasted demand (80% vs. 20% actual), leading to over-provisioning. The long scale-down cooldown prevented the autoscaler from quickly de-provisioning resources after a sudden workload drop, resulting in wasted resources.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 600}
+
+--- Processing Scenario 3 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly underestimated the actual sustained high load, and the reactive autoscaling threshold was too high, leading to delayed capacity addition and an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 75,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 75, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 4 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly overestimated CPU usage for a gradual decline workload (70% forecast vs 15% actual), leading to over-provisioning and wasted resources. The current scale-down cooldown of 900 seconds is likely too long, delaying the reclamation of excess capacity.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 75,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 75, 'scale_down_cooldown': 900}
+
+--- Processing Scenario 5 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly underestimated 'Micro-Burst' workload, leading to an SLA violation due to insufficient capacity. The reactive threshold was not low enough to compensate for the forecast error quickly.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 70,
+  "new_cooldown": 120
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 70, 'scale_down_cooldown': 120}
+
+--- Processing Scenario 6 ---
+LLM Output: {
+  "root_cause": "Normal operation, observed usage is in line with forecast and well within the reactive threshold.",
+  "recommended_action": "NO_ACTION",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 7 ---
+LLM Output: {
+  "root_cause": "The predictive model significantly over-predicted CPU usage, leading to resource over-provisioning. The extended scale-down cooldown period exacerbated the duration of wasted resources.",
+  "recommended_action": "DECREASE_COOLDOWN",
+  "new_fallback_threshold": 85,
+  "new_cooldown": 600
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 85, 'scale_down_cooldown': 1200}
+
+--- Processing Scenario 8 ---
+LLM Output: {
+  "root_cause": "Predictive model failed to forecast extreme burst workload, leading to 100% CPU utilization and SLA violation, indicating the reactive autoscaler threshold was not aggressive enough.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 40,
+  "new_cooldown": 300
+}
+Guardrail Triggered: Threshold 40 is unsafe. Ignoring.
+Final Safe Configuration: {'reactive_fallback_threshold': 55, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 9 ---
+LLM Output: {
+  "root_cause": "No anomaly detected. System operating within normal parameters with accurate predictive forecasting.",
+  "recommended_action": "NO_ACTION",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 300
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 300}
+
+--- Processing Scenario 10 ---
+LLM Output: {
+  "root_cause": "Predictive model significantly underestimated workload, leading to under-provisioning. The reactive fallback threshold was too high to scale up in time, resulting in an SLA violation.",
+  "recommended_action": "LOWER_REACTIVE_THRESHOLD",
+  "new_fallback_threshold": 80,
+  "new_cooldown": 600
+}
+Final Safe Configuration: {'reactive_fallback_threshold': 80, 'scale_down_cooldown': 600}
+_________________________________________________________________________________________________________________
+
+WEEK 8 TERMINAL OUTPUT (expiriment_eval.py): 
+
+============================================================
+WEEK 8 EXPERIMENT MATRIX: PRIMARY METRICS
+============================================================
+                   Policy Configuration  SLA Violation Rate (%)  Cost / Resource Waste (%)  Avg Provisioning Latency (s)
+         1. Reactive Baseline (K8s HPA)                    14.2                       12.0                           120
+       2. Predictive Baseline (ML Only)                     8.5                       15.5                            45
+3. Predictive + AIOps (With Guardrails)                     2.1                        8.4                            15
+     4. Ablation: AIOps (NO GUARDRAILS)                     1.2                       48.7                            10
+
+============================================================
+ABLATION STUDY ANALYSIS (Component Removed: Python Guardrails)
+============================================================
+Observation: Removing the value-bounding guardrails allowed the LLM to apply
+hallucinated configurations (e.g., reactive_fallback_threshold = 40% during
+Scenario 8). While this slightly reduced SLA violations (2.1% -> 1.2%), it
+caused Cost/Resource Waste to catastrophically spike to 48.7%.
+Conclusion: The guardrail component is strictly required for production viability.
