@@ -2,8 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+# --- DYNAMIC FILE PATH LOGIC ---
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
+FILE_PATH = os.path.join(DATA_DIR, 'week03_updated_cleaned_data.csv')
 
-df = pd.read_csv('week03_updated_cleaned_data.csv') # --- UPDATE FILE PATH IF NEEDED --
+# LOAD DATA 
+df = pd.read_csv(FILE_PATH) 
 df['time'] = pd.to_datetime(df['time'])
 df.set_index('time', inplace=True)
 
