@@ -43,7 +43,7 @@ The codebase has been configured using dynamic relative paths (os.path). This en
 
 **Phase 3: Final Experiment Matrix**
 - Evaluate all configurations: This script runs the Reactive baseline, Predictive baseline, and the proposed AIOps policies against the test logs, outputting the final SLA Violation and Resource Waste metrics
-- **python src/experiment_eval.py**
+   - **python src/experiment_eval.py**
 
 ## Notes on Codebase Standards
 - **Dynamic Pathing**: Absolute paths and hardcoded strings have been removed. All scripts utilize the os library to dynamically locate the /data and /figures directories.
