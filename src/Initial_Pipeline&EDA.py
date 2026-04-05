@@ -7,13 +7,17 @@ import seaborn as sns
 import numpy as np
 import os
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
+
 # --- 1. CONFIGURATION ---
 FILES_TO_LOAD = [
-    'instance_usage-000000000000.json.gz', # --- UPDATE FILE PATHS IF NEEDED ---
-    'instance_usage-000000000001.json.gz'
+    os.path.join(DATA_DIR, 'instance_usage-000000000000.json.gz'),
+    os.path.join(DATA_DIR, 'instance_usage-000000000001.json.gz')
 ]
-OUTPUT_CSV = 'week03_updated_cleaned_data.csv'
-TRACE_START_DATE = pd.Timestamp("2019-05-01") 
+
+OUTPUT_CSV = os.path.join(DATA_DIR, 'week03_updated_cleaned_data.csv')
+TRACE_START_DATE = pd.Timestamp("2019-05-01")
 
 # --- 2. DATA INGESTION ---
 def load_and_filter_usage(file_list, max_rows_per_file=1000000):
