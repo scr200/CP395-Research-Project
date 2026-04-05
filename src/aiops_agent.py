@@ -4,8 +4,7 @@ import json
 import time
 
 # 1. Setup API (Using the NEW SDK)
-# Replace 'YOUR_API_KEY' with your new secret key
-client = genai.Client(api_key="AIzaSyDqyx488F-h0LmYJXy2niOhVVJXrmVCj-k")
+client = genai.Client(api_key="AIzaSyDqyx488F-h0LmYJXy2niOhVVJXrmVCj-k") # -- REPLACE APY KEY --
 
 # 2. Define the Prompt
 system_prompt = """
