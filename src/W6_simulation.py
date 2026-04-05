@@ -7,15 +7,19 @@ from sklearn.linear_model import LinearRegression
 import gym
 from gym import spaces
 
-
 # REPRODUCIBILITY
 SEED = 42
 np.random.seed(SEED)
 
 # 2. PREPARE DATA & INTEGRATE PREDICTOR (Linear Regression)
 
+# --- DYNAMIC FILE PATH LOGIC ---
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
+FILE_PATH = os.path.join(DATA_DIR, 'week03_updated_cleaned_data.csv')
+
 print("Loading data and generating Linear Regression forecasts...")
-df = pd.read_csv('week03_updated_cleaned_data.csv') # --- ENSURE CORRECT FILE PATH ON PERSONAL MACHINE
+df = pd.read_csv(FILE_PATH) 
 df['time'] = pd.to_datetime(df['time'])
 df.set_index('time', inplace=True)
 
