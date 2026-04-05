@@ -1,7 +1,6 @@
 # CP395 Research Project: Predictive vs. Reactive Autoscaling
 **Author:** Sufiya Rahemtulla
 **Institution:** Wilfrid Laurier University
-**Links:** * [Project Board / Evidence Trail](INSERT_LINK_HERE)
 
 ## Overview
 This repository contains the data, source code, and reproducibility artifacts for a hybrid "Predictive + AIOps" cloud autoscaling architecture. The system combines Linear Regression statistical forecasting with a Gemini 2.5 Flash LLM triage agent, safely bounded by deterministic Python guardrails to prevent AI hallucinations.
@@ -9,8 +8,8 @@ This repository contains the data, source code, and reproducibility artifacts fo
 ## Setup & Installation
 1. **Clone the repository:**
    ```bash
-   git clone [INSERT_REPO_URL]
-   cd [REPO_NAME]
+   git clone [https://github.com/scr200/CP395-Research-Project]
+   cd [CP395-Research-Project]
 
 2. **Install dependencies**
    pip install -r requirements.txt
