@@ -3,8 +3,16 @@ from google.genai import types
 import json
 import time
 
-# 1. Setup API (Using the NEW SDK)
-client = genai.Client(api_key="AIzaSyDqyx488F-h0LmYJXy2niOhVVJXrmVCj-k") # -- REPLACE APY KEY --
+#--API KEY--
+# Load the hidden environment variables from the .env file
+load_dotenv()
+# Securely fetch the API key
+api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("API Key not found. Please ensure you have a .env file with GEMINI_API_KEY set.")
+# 3. Setup API (uses the NEW SDK)
+client = genai.Client(api_key=api_key)
+#----
 
 # 2. Define the Prompt
 system_prompt = """
