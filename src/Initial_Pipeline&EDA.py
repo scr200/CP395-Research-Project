@@ -9,10 +9,10 @@ import os
 
 # --- 1. CONFIGURATION ---
 FILES_TO_LOAD = [
-    '/Users/sufiya/my_data_folder/classes/CP395/data/instance_usage-000000000000.json.gz',
-    '/Users/sufiya/my_data_folder/classes/CP395/data/instance_usage-000000000001.json.gz'
+    'instance_usage-000000000000.json.gz', # --- ENSURE CORRECT FILE PATHS ON PERSONAL MACHINE ---
+    'instance_usage-000000000001.json.gz'
 ]
-OUTPUT_CSV = '/Users/sufiya/my_data_folder/classes/CP395/data/week03_updated_cleaned_data.csv'
+OUTPUT_CSV = 'week03_updated_cleaned_data.csv'
 TRACE_START_DATE = pd.Timestamp("2019-05-01") 
 
 # --- 2. DATA INGESTION ---
