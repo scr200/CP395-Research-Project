@@ -69,8 +69,13 @@ def apply_guardrails(llm_output, current_config):
 
 # 3. Run the Test
 if __name__ == "__main__":
-    # Load your test scenarios
-    with open("/Users/sufiya/my_data_folder/classes/CP395/test_logs.json", "r") as f:
+    
+    # --- DYNAMIC FILE PATH LOGIC ---
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    FILE_PATH = os.path.join(SCRIPT_DIR, "test_logs.json")
+    
+    # Load test scenarios
+    with open(FILE_PATH, "r") as f:
         scenarios = json.load(f)
         
     for log in scenarios:
@@ -80,10 +85,6 @@ if __name__ == "__main__":
         llm_decision = evaluate_anomaly(log)
         print("LLM Output:", json.dumps(llm_decision, indent=2))
         
-        # Apply Guardrails
-        final_config = apply_guardrails(llm_decision, log["current_config"])
-        print("Final Safe Configuration:", final_config)
-
         # Apply Guardrails
         final_config = apply_guardrails(llm_decision, log["current_config"])
         print("Final Safe Configuration:", final_config)
