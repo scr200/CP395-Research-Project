@@ -8,8 +8,8 @@ This repository contains the data, source code, and reproducibility artifacts fo
 ## Setup & Installation
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/scr200/CP395-Research-Project]
-   cd [CP395-Research-Project]
+   git clone https://github.com/scr200/CP395-Research-Project.git
+   cd CP395-Research-Project
 
 2. **Install dependencies**
    pip install -r requirements.txt
