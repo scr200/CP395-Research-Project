@@ -7,3 +7,4 @@ statsmodels
 pycaret[full]
 gym
 google-genai
+python-dotenv
