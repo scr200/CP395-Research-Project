@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 import numpy as np
 
 # LOAD DATA - using Intermediate Job for prediction baseline
-df = pd.read_csv('/Users/sufiya/my_data_folder/classes/CP395/data/week03_updated_cleaned_data.csv')
+df = pd.read_csv('week03_updated_cleaned_data.csv') # --- ENSURE CORRECT FILE PATH ON PERSONAL MACHINE --
 df['time'] = pd.to_datetime(df['time'])
 df.set_index('time', inplace=True)
 
