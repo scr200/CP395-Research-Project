@@ -9,7 +9,7 @@ import os
 
 # --- 1. CONFIGURATION ---
 FILES_TO_LOAD = [
-    'instance_usage-000000000000.json.gz', # --- ENSURE CORRECT FILE PATHS ON PERSONAL MACHINE ---
+    'instance_usage-000000000000.json.gz', # --- UPDATE FILE PATHS IF NEEDED ---
     'instance_usage-000000000001.json.gz'
 ]
 OUTPUT_CSV = 'week03_updated_cleaned_data.csv'
