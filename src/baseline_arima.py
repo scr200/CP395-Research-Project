@@ -4,8 +4,14 @@ from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import numpy as np
 
+# --- DYNAMIC FILE PATH LOGIC ---
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
+FILE_PATH = os.path.join(DATA_DIR, 'week03_updated_cleaned_data.csv')
+
 # LOAD DATA - using Intermediate Job for prediction baseline
-df = pd.read_csv('week03_updated_cleaned_data.csv') # --- ENSURE CORRECT FILE PATH ON PERSONAL MACHINE --
+print("Loading data...")
+df = pd.read_csv(FILE_PATH) 
 df['time'] = pd.to_datetime(df['time'])
 df.set_index('time', inplace=True)
 
