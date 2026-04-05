@@ -7,6 +7,7 @@ import seaborn as sns
 import numpy as np
 import os
 
+# -- UPDATE FILE PATH AS NEEDED --
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
 
