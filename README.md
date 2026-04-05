@@ -31,19 +31,19 @@ The codebase has been configured using dynamic relative paths (os.path). This en
 
 **Phase 1: Workload Synthesis & Heuristic Baselines**
 1. Execute the EDA pipeline to ingest the raw traces and generate the synthetic workload profiles (outputs to the /data folder)
-      python src/Initial_Pipeline&EDA.py
+   - **python src/Initial_Pipeline&EDA.py**
 2. Run the Baselines & Simulators: Execute the standalone evaluation scripts to simulate the autoscaling environments. This will generate the performance            graphs found in the /figures directory
-      python src/baseline_arima.py
-      python src/baseline_policy.py
-      python src/W6_simulation.py
+   - **python src/baseline_arima.py**
+   - **python src/baseline_policy.py**
+   - **python src/W6_simulation.py**
 
 **Phase 2: AIOps LLM Evaluation**
 - Run the LLM Agent: This script parses the 10 anomaly profiles located in test_logs.json, queries the Gemini model for root-cause analysis, and applies the        Python safety guardrails to intercept unsafe scaling recommendations
-      python src/aiops_agent.py
+  - **python src/aiops_agent.py**
 
 **Phase 3: Final Experiment Matrix**
 - Evaluate all configurations: This script runs the Reactive baseline, Predictive baseline, and the proposed AIOps policies against the test logs, outputting the final SLA Violation and Resource Waste metrics
-   python src/experiment_eval.py
+- **python src/experiment_eval.py**
 
 ## Notes on Codebase Standards
 - **Dynamic Pathing**: Absolute paths and hardcoded strings have been removed. All scripts utilize the os library to dynamically locate the /data and /figures directories.
