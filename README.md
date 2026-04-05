@@ -1,34 +1,52 @@
-# CP395 Research Project
+# CP395 Research Project: Predictive vs. Reactive Autoscaling
+**Author:** Sufiya Rahemtulla
+**Institution:** Wilfrid Laurier University
+**Links:** * [Project Board / Evidence Trail](INSERT_LINK_HERE)
 
-## Setup
-1. Clone the repository
-2. Install dependencies:
+## Overview
+This repository contains the data, source code, and reproducibility artifacts for a hybrid "Predictive + AIOps" cloud autoscaling architecture. The system combines Linear Regression statistical forecasting with a Gemini 2.5 Flash LLM triage agent, safely bounded by deterministic Python guardrails to prevent AI hallucinations.
+
+## Setup & Installation
+1. **Clone the repository:**
+   ```bash
+   git clone [INSERT_REPO_URL]
+   cd [REPO_NAME]
+
+2. **Install dependencies**
    pip install -r requirements.txt
 
+3. **Configure the LLM API Key**
+   To execute the AIOps offline triage agent, you must provide your own Google Gemini API Key.
+   Create a file named .env in the root directory of this project.
+   Add the following line with your key: GEMINI_API_KEY="your_api_key_here"
+   Security Note: Ensure that a .gitignore file exists in the root directory containing the line .env to prevent your API key from being uploaded to version          control.
+
 ## Repository Structure
-- data/        : Datasets (raw and processed)
-- src/         : Source code
-- experiments/ : Experiment scripts and notebooks
-- figures/     : Generated plots and figures
-- reports/     : Papers, reports, and notes
+   /data : Datasets (raw Google Cluster traces and processed synthetic workloads).
+   /src : Core source code, simulation environments, and AIOps agent.
+   /experiments : Experiment logs and raw outputs (test_logs.json).
+   /figures : Generated plots, graphs, and performance matrices used in the final paper.
+   /reports : Final manuscript, literature review, and weekly progress reports.
 
-# Reproducibility
-## Reproducibility
+## Reproducibility Guide
+The codebase has been configured using dynamic relative paths (os.path). This ensures that you can run all the following commands directly from the root directory of the repository without modifying any internal file paths, regardless of your operating system.
 
-### Phase 1: Workload Synthesis & Heuristic Baselines (Weeks 1-6)
-To reproduce the initial data processing and heuristic baseline evaluations:
+**Phase 1: Workload Synthesis & Heuristic Baselines**
+1. Execute the EDA pipeline to ingest the raw traces and generate the synthetic workload profiles (outputs to the /data folder)
+      python src/Initial_Pipeline&EDA.py
+2. Run the Baselines & Simulators: Execute the standalone evaluation scripts to simulate the autoscaling environments. This will generate the performance            graphs found in the /figures directory
+      python src/baseline_arima.py
+      python src/baseline_policy.py
+      python src/W6_simulation.py
 
-1. Execute `Initial Pipeline & EDA.py` to ingest the raw Google Cluster traces and generate the synthetic workload profiles (producing the `week03_updated_cleaned_data.csv` file). 
-   * **Note:** Ensure that the file path for `week03_updated_cleaned_data.csv` on your local machine is updated in the script prior to running.
-2. Run any of the standalone evaluation scripts, such as `W6 simulation.py`, `baseline_arima.py`, or `baseline_policy.py`, to simulate the autoscaling environments and generate the output graphs.
+**Phase 2: AIOps LLM Evaluation**
+Run the LLM Agent: This script parses the 10 anomaly profiles located in test_logs.json, queries the Gemini model for root-cause analysis, and applies the        Python safety guardrails to intercept unsafe scaling recommendations
+      python src/aiops_agent.py
 
-### Phase 2: AIOps LLM Evaluation (Weeks 7-9)
-To reproduce the LLM Anomaly Triage Agent evaluations and the resulting Experiment Matrix:
+**Phase 3: Final Experiment Matrix**
+Evaluate all configurations: This script runs the Reactive baseline, Predictive baseline, and the proposed AIOps policies against the test logs, outputting the final SLA Violation and Resource Waste metrics
+   python src/experiment_eval.py
 
-1. **Run the LLM Agent (Week 7):**
-   This script parses the 10 anomaly profiles located in `test_logs.json`, queries the Gemini 2.5 Flash model for diagnostic reasoning, and applies the Python safety guardrails to intercept unsafe scaling recommendations.
-   `python src/aiops_agent.py`
-
-2. **Generate the Experiment Matrix (Week 8):**
-   This script aggregates the performance of the anomaly logs to calculate SLA violations, resource waste, and latency metrics. It compares the Reactive and Predictive baseline configurations against the proposed AIOps system and runs the guardrail ablation study.
-   `python src/experiment_eval.py`
+## Notes on Codebase Standards
+- **Dynamic Pathing**: Absolute paths and hardcoded strings have been removed. All scripts utilize the os library to dynamically locate the /data and /figures directories.
+- **API Security**: The google-genai SDK is wrapped using python-dotenv to ensure LLM credentials remain entirely localized to the user's machine.
