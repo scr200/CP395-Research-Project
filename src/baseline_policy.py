@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-df = pd.read_csv('/Users/sufiya/my_data_folder/classes/CP395/data/week03_updated_cleaned_data.csv')
+df = pd.read_csv('week03_updated_cleaned_data.csv') # --- UPDATE FILE PATH IF NEEDED --
 df['time'] = pd.to_datetime(df['time'])
 df.set_index('time', inplace=True)
 
